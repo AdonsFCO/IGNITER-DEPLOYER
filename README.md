@@ -1,2 +1,2 @@
-# IGNITER-DEPLOIER
-A simple workstation deployer. 
+# IGNITER-DEPLOYER
+A simple workstation deployer
