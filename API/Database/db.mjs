@@ -10,7 +10,7 @@ const client = new MongoClient(connectionString);
 let conn;
 try {
   conn = await client.connect();
-  console.log("Conected to the database.");
+  console.log("Connected to the database.");
 } catch (e) {
   console.error(e);
 }

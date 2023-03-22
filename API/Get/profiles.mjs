@@ -22,7 +22,6 @@ res.send(profiles);
  
 }
 
-
 async function getProfileList(req, res) {
   const offset = parseInt(req.params.offset);
   const page = parseInt(req.params.page);
@@ -44,8 +43,6 @@ res.send(profiles);
 }
  
 }
-
-
 
 async function getSingleProfile(req, res) {
  const id = new ObjectId(req.params.id);
