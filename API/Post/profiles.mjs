@@ -1,7 +1,8 @@
+import { ObjectId } from "mongodb";
 import db from "../Database/db.mjs";
 
 async function setNewProfile(req, res) {
-  const profile = db.collection("Profile");
+  const profile = db.collection("Profiles");
 
   try {
     if (!req.body.name) {
@@ -11,15 +12,16 @@ async function setNewProfile(req, res) {
       //To make sure that the profile doesn't exist on the server.
       const existingProfile = await profile
         .find({ name: req.body.name })
-        .project({ _id: 1, name: 1 }).toArray();
-        
-      if (existingProfile) {
+        .project({ _id: 1, name: 1 })
+        .toArray();
+      
+      if (existingProfile.length > 0 ) {
         res.status(208).send({
           message: `A profile with the name "${req.body.name}" already exists.`,
           success: false,
           existingProfile,
         });
-        return
+        return;
       }
 
       const currentDate = new Date();
@@ -47,8 +49,25 @@ async function setNewProfile(req, res) {
       message: "Failed to add profile",
       success: false,
       error,
-    });
+      });
+    }
   }
+  async function updateProfile(req, res) {
+    const profiles = db.collection("Profiles");
+
+  try {
+    //Check if the parameter of the profile exists.
+    if (!req.body.id) {
+      res.status(204).send("id is not present.");
+      return;
+    }
+    const id = new ObjectId(req.body.id);
+    //Determine that the id exists on the database.
+    const profileToUpdate = profiles.findOne({ _id: id })
+    if (profileToUpdate) {
+      console.log(profileToUpdate);
+    }
+  } catch (error) {}
 }
 
-export { setNewProfile };
+export { setNewProfile, updateProfile };
