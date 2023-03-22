@@ -52,6 +52,8 @@ async function setNewProfile(req, res) {
       });
     }
   }
+
+
   async function updateProfile(req, res) {
     const profiles = db.collection("Profiles");
 
@@ -63,11 +65,14 @@ async function setNewProfile(req, res) {
     }
     const id = new ObjectId(req.body.id);
     //Determine that the id exists on the database.
-    const profileToUpdate = profiles.findOne({ _id: id })
-    if (profileToUpdate) {
+    const profileToUpdate = profiles.findOne({ _id: id }).toArray()
+    if (profileToUpdate.length === 1) {
       console.log(profileToUpdate);
+
+
+
     }
   } catch (error) {}
 }
 
-export { setNewProfile, updateProfile };
+export { setNewProfile };
