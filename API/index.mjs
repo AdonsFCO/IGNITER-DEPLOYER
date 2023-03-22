@@ -21,7 +21,7 @@ app.get('/profile/:id',getSingleProfile);
 
 //Scripts 
 
-//---------------Set--->
+//---------------Post--->
 
 //Profile
     app.post('/set/profile',setNewProfile);
