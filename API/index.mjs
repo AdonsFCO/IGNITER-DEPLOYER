@@ -1,7 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import bodyParser from "body-parser";
-import {getFullProfiles,getSingleProfile, getProfileList} from "./Get/profiles.mjs";
+import {getFullProfiles,getSingleProfile, getProfileList} from "./Post/profiles.mjs";
 import {setNewProfile} from "./Set/profiles.mjs"
 
 dotenv.config();
