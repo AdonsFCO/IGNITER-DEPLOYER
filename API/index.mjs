@@ -23,7 +23,14 @@ app.get("/get/profile/:id", getSingleProfile);
 
 //Set 
 app.post("/add/profile", setNewProfile);
-app.put("/update/profile", updateProfile);
+
+app.put("/update/profileInfo/:id", updateProfile);
+
+app.put("push/GlobalPrograms/profile/:id", updateProfile);
+app.put("push/UniquePrograms/profile/:id", updateProfile);
+app.put("push/UniqueScripts/profile/:id", updateProfile);
+app.put("push/GlobalScripts/profile/:id", updateProfile);
+
 
 //Programs
 
