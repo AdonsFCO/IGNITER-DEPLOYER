@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import db from "../Database/db.mjs";
 
 async function setNewProfile(req, res) {
@@ -14,8 +13,8 @@ async function setNewProfile(req, res) {
         .find({ name: req.body.name })
         .project({ _id: 1, name: 1 })
         .toArray();
-      
-      if (existingProfile.length > 0 ) {
+
+      if (existingProfile.length > 0) {
         res.status(208).send({
           message: `A profile with the name "${req.body.name}" already exists.`,
           success: false,
@@ -34,7 +33,7 @@ async function setNewProfile(req, res) {
         uniqueScripts: req.body.uniqueScripts,
         agent: req.body.agentUrl,
         addedBy: req.body.addedBy,
-        date: currentDate,
+        addedDate: currentDate,
         changeDate: currentDate,
       };
       await profile.insertOne(newProfile);
@@ -49,30 +48,8 @@ async function setNewProfile(req, res) {
       message: "Failed to add profile",
       success: false,
       error,
-      });
-    }
+    });
   }
-
-
-  async function updateProfile(req, res) {
-    const profiles = db.collection("Profiles");
-
-  try {
-    //Check if the parameter of the profile exists.
-    if (!req.body.id) {
-      res.status(204).send("id is not present.");
-      return;
-    }
-    const id = new ObjectId(req.body.id);
-    //Determine that the id exists on the database.
-    const profileToUpdate = profiles.findOne({ _id: id }).toArray()
-    if (profileToUpdate.length === 1) {
-      console.log(profileToUpdate);
-
-
-
-    }
-  } catch (error) {}
 }
 
 export { setNewProfile };
